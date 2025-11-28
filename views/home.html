@@ -5,38 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="archive, follow, imageindex, index, odp, snippet, translate">
     <meta name="author" content="Alphabot">
-    <title>Alphabot API | Online</title>
+    <title>Alphabot API | Inovasi Data</title>
     <link rel="shortcut icon" href="https://f.top4top.io/p_2097ib6hw1.jpg" type="image/x-icon" />
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Custom Font: Inter */
+        /* Custom Font: Inter for modern look */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
 
         :root {
-            --neon-green: #3B82F6; /* Tailwind Blue-500 */
+            --primary-color: #38bdf8; /* Tailwind Sky-400 */
+            --accent-bg: #0f172a; /* Tailwind Slate-900 */
+            --glow-color: rgba(56, 189, 248, 0.5);
         }
 
+        html, body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
         body {
             font-family: 'Inter', sans-serif;
-            /* Dark, futuristic background */
-            background-color: #0A0A0F;
-            background-image: radial-gradient(circle at 50% 100%, #111827 0%, #0A0A0F 50%);
-            min-height: 100vh;
+            background-color: #030712; /* Deep Slate Blue */
+            color: #E2E8F0;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 1rem;
-            transition: all 0.5s ease;
+            position: relative;
         }
 
-        /* Centering the main content on screen */
-        .container-center {
-            animation: fadeIn 1s ease-out;
+        /* === ANIMATED BACKGROUND (Subtle Moving Grid) === */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                /* Subtle moving grid */
+                repeating-linear-gradient(0deg, #0f172a11, #0f172a11 1px, transparent 1px, transparent 50px),
+                repeating-linear-gradient(90deg, #0f172a11, #0f172a11 1px, transparent 1px, transparent 50px),
+                /* Deep dark base and subtle radial light */
+                radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.03) 0%, transparent 50%),
+                #030712;
+            background-size: 100% 100%, 100% 100%, cover;
+            animation: gridMove 60s linear infinite;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+        @keyframes gridMove {
+            from { background-position: 0 0, 0 0, center; }
+            to { background-position: 500px 500px, 500px 500px, center; }
+        }
+        /* ================================================= */
+
+        /* Animation for Hero Section */
+        .hero-animation {
+            animation: fadeInDown 1.5s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -44,101 +76,132 @@
         .cursor {
             display: inline-block;
             width: 3px;
-            height: 1.2em; /* Match font size */
-            margin-left: 2px;
-            background-color: var(--neon-green);
-            animation: blink .7s step-end infinite;
+            height: 1.1em;
+            margin-left: 3px;
+            background-color: var(--primary-color);
+            animation: blink .6s step-end infinite;
             vertical-align: middle;
         }
 
         @keyframes blink {
-            from, to { opacity: 0.8; }
+            from, to { opacity: 0.9; }
             50% { opacity: 0; }
         }
 
-        /* Neon Glow Effect for Status Text */
-        .typed-text {
-            color: var(--neon-green);
-            text-shadow: 0 0 5px rgba(59, 130, 246, 0.5), 0 0 10px rgba(59, 130, 246, 0.3);
+        /* Status Glow */
+        .status-glow {
+            color: var(--primary-color);
+            text-shadow: 0 0 12px var(--glow-color); 
             font-weight: 700;
         }
-
-        /* Modern Button/Link Style */
-        .neon-button {
-            transition: all 0.3s ease;
-            box-shadow: 0 0 5px rgba(59, 130, 246, 0.4);
+        
+        /* Main Button Style */
+        .main-cta {
+            transition: all 0.4s ease;
+            box-shadow: 0 0 20px var(--glow-color);
         }
-        .neon-button:hover {
-            box-shadow: 0 0 10px var(--neon-green), 0 0 20px rgba(59, 130, 246, 0.6);
-            transform: translateY(-2px);
+        .main-cta:hover {
+            box-shadow: 0 0 35px var(--glow-color), 0 0 70px rgba(56, 189, 248, 0.4);
+            transform: translateY(-2px) scale(1.01);
+            background-color: #0c4a6e;
         }
-
     </style>
 </head>
 
 <body>
-    <div class="container-center w-full max-w-lg mx-auto bg-gray-900/70 backdrop-blur-sm p-6 sm:p-10 rounded-xl border border-gray-700/50 shadow-2xl">
+    <!-- 1. Navigation Bar -->
+    <nav class="w-full bg-transparent p-4 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center px-4">
+            <div class="text-2xl font-extrabold text-white tracking-widest">
+                <span class="text-sky-400">ALPHA</span>BOT
+            </div>
+            <div class="space-x-4 hidden sm:flex text-sm font-medium">
+                <a href="#features" class="text-gray-400 hover:text-sky-400 transition-colors">Fitur</a>
+                <a href="/docs" class="text-gray-400 hover:text-sky-400 transition-colors">Dokumentasi</a>
+                <a href="#cta" class="text-gray-400 hover:text-sky-400 transition-colors">Mulai</a>
+            </div>
+            <a href="/docs" class="sm:hidden text-sm font-semibold text-sky-400 border border-sky-400 px-3 py-1 rounded-full hover:bg-sky-900 transition-colors">Mulai</a>
+        </div>
+    </nav>
 
-        <!-- Header/Title Section -->
-        <header class="text-center mb-10">
-            <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-2">
-                <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-400">
-                    Alphabot API
-                </span>
-            </h1>
-            <p class="text-gray-400 text-sm sm:text-base">Layanan Web API Cepat dan Andal.</p>
-        </header>
-
-        <!-- Status Section -->
-        <div class="status-box text-center p-6 border border-blue-500/30 rounded-lg bg-gray-800/50 mb-8 animate-[fadeIn_1.5s_ease-out]">
-            <p class="text-gray-300 text-lg sm:text-xl font-medium uppercase tracking-wider">
-                STATUS:
-                <span class="typed-text"></span>
-                <span class="cursor"></span>
+    <!-- 2. Hero Section -->
+    <main class="w-full max-w-7xl mx-auto py-24 sm:py-36 px-4 hero-animation">
+        <div class="text-center mb-24">
+            <p class="text-lg sm:text-xl font-medium uppercase text-sky-400 mb-4 tracking-widest">
+                API Generasi Berikutnya
             </p>
+            <h1 class="text-5xl sm:text-7xl lg:text-8xl font-black text-white tracking-tight mb-8 leading-tight">
+                Inovasi Tanpa Batas <br class="hidden sm:inline"> dengan <span class="bg-clip-text text-transparent bg-gradient-to-r from-sky-300 to-cyan-500">ALPHABOT API</span>
+            </h1>
+            <p class="text-gray-300 text-xl sm:text-2xl font-light max-w-3xl mx-auto mb-10">
+                Kekuatan data, latensi rendah, dan keandalan 99.9% tersedia di ujung jari Anda. Mulai proyek revolusioner Anda sekarang.
+            </p>
+            
+            <!-- Main CTA Button -->
+            <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6 mb-16" id="cta">
+                <a href="/docs" class="main-cta inline-flex items-center justify-center w-full max-w-xs sm:max-w-md px-10 py-4 text-xl font-semibold rounded-full text-white bg-sky-600 hover:bg-sky-700">
+                    <!-- Icon: Code -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 mr-3">
+                        <polyline points="16 18 22 12 16 6"/>
+                        <polyline points="8 6 2 12 8 18"/>
+                    </svg>
+                    INTEGRASI SEKARANG
+                </a>
+                <div class="status-box text-center p-3 sm:p-4 rounded-lg bg-gray-800/50 border border-sky-600/30">
+                    <p class="text-gray-400 text-sm sm:text-base font-medium uppercase tracking-wider">
+                        STATUS SISTEM:
+                        <span class="typed-text status-glow ml-2"></span>
+                        <span class="cursor"></span>
+                    </p>
+                </div>
+            </div>
         </div>
 
-        <!-- Documentation & Action Button -->
-        <div class="readdocs text-center">
-            <a href="/docs" class="neon-button inline-flex items-center justify-center w-full sm:w-auto px-8 py-3 text-lg font-semibold rounded-full text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-500/50 transition duration-300">
-                <!-- Icon: Book Open -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-2">
-                    <path d="M2 19h20"/>
-                    <path d="M6 21l-4-2"/>
-                    <path d="M18 21l4-2"/>
-                    <path d="M15 13L9 7"/>
-                    <path d="M11 7h-2a2 2 0 0 0-2 2v10"/>
-                    <path d="M15 17h2a2 2 0 0 0 2-2V5"/>
-                    <path d="M5 13h10a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2z"/>
-                </svg>
-                BACA DOKUMENTASI
-            </a>
-        </div>
-    </div>
+        <!-- 3. Feature List Section -->
+        <section id="features" class="pt-16 pb-20">
+            <h2 class="text-4xl font-extrabold text-white mb-12 border-b-2 border-sky-400/20 pb-4 max-w-sm mx-auto">
+                Mengapa Alphabot?
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                
+                <!-- Feature 1 -->
+                <div class="p-6 bg-gray-800/40 rounded-xl border border-gray-700/50 hover:border-sky-500 transition-all duration-300 transform hover:scale-[1.02]">
+                    <span class="text-4xl mb-4 block status-glow">⚡</span>
+                    <h3 class="text-2xl font-bold text-white mb-2">Kecepatan Mutlak</h3>
+                    <p class="text-gray-400">Dengan infrastruktur jaringan yang dioptimalkan, kami menjamin latensi serendah mungkin untuk setiap permintaan API Anda.</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="p-6 bg-gray-800/40 rounded-xl border border-gray-700/50 hover:border-sky-500 transition-all duration-300 transform hover:scale-[1.02]">
+                    <span class="text-4xl mb-4 block status-glow">🌐</span>
+                    <h3 class="text-2xl font-bold text-white mb-2">Skalabilitas Global</h3>
+                    <p class="text-gray-400">Dirancang untuk menangani jutaan permintaan. Skalakan aplikasi Anda tanpa khawatir tentang batasan *backend*.</p>
+                </div>
 
-    <!-- Footer/Social Link -->
-    <footer class="fixed bottom-0 left-0 right-0 p-4 text-center">
-        <p class="text-gray-500 text-sm">
-            Hubungi Developer:
-            <a href="http://wa.me/62887435047326" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-blue-400 transition-colors duration-200">
-                <!-- Icon: WhatsApp/Phone -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="inline-block align-middle mr-1">
-                    <path d="M5 22h14"/>
-                    <path d="M5 18H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-1"/>
-                    <path d="M12 18v4"/>
-                </svg>
-                +62 887-4350-47326 (WhatsApp)
-            </a>
+                <!-- Feature 3 -->
+                <div class="p-6 bg-gray-800/40 rounded-xl border border-gray-700/50 hover:border-sky-500 transition-all duration-300 transform hover:scale-[1.02]">
+                    <span class="text-4xl mb-4 block status-glow">🔒</span>
+                    <h3 class="text-2xl font-bold text-white mb-2">Keamanan Maksimal</h3>
+                    <p class="text-gray-400">Setiap *endpoint* API dilindungi dengan enkripsi terbaik, memastikan data Anda tetap aman dan pribadi.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 4. Footer (Minimalist) -->
+    <footer class="w-full p-4 bg-gray-900/50 mt-16">
+        <p class="text-center text-gray-500 text-sm">
+            © 2024 Alphabot. Hak Cipta Dilindungi. | Kebijakan Privasi
         </p>
     </footer>
 
     <script>
-        // === Typing Effect Logic (Modernized) ===
+        // === Typing Effect Logic ===
         const typedTextSpan = document.querySelector(".typed-text");
-        const textArray = ["ACTIVE", "ONLINE", "READY"]; // Changed ~ to clean text
-        const typingDelay = 150;
-        const erasingDelay = 75;
-        const newTextDelay = 1500; // Delay before starting next word
+        const textArray = ["BEROPERASI", "STABIL", "SIAP MELAYANI"]; 
+        const typingDelay = 100;
+        const erasingDelay = 50;
+        const newTextDelay = 1500; 
         let textArrayIndex = 0;
         let charIndex = 0;
 
@@ -162,21 +225,15 @@
                 if (textArrayIndex >= textArray.length) {
                     textArrayIndex = 0;
                 }
-                setTimeout(type, 500); // Shorter delay before typing the new word
+                setTimeout(type, 300);
             }
         }
 
-        // Start the typing effect when the page content is fully loaded
         document.addEventListener("DOMContentLoaded", function() {
-            // Check if the span exists before starting
             if (typedTextSpan) {
                 setTimeout(type, 1000); 
             }
         });
-
-        // The old jQuery/AJAX submission logic was removed as it was for form handling
-        // and doesn't seem relevant for a static landing page/documentation entry point.
-
     </script>
 </body>
 </html>
